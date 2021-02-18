@@ -6,5 +6,5 @@ public interface IToolingRepository<T> {
     void setInput(T filter);
     void executeScript(T filter, String script);
     void acceptDialog();
-    void sleep();
+    void sleep() throws InterruptedException;
 }
