@@ -11,6 +11,7 @@ public class ServiceFactory {
 
   public static enum Service {
     GO_TO_SERVICE,
+    SELECT_PRODUCT_SERVICE
   }
 
   public static IService getService(Service service, WebDriver driver) throws Exception {
@@ -18,6 +19,8 @@ public class ServiceFactory {
     switch (service) {
       case GO_TO_SERVICE:
         return new GoToService(seleniumRepository);
+      case SELECT_PRODUCT_SERVICE:
+        return new SelectProductService(seleniumRepository);
       default:
         throw new Exception("The service not exist");
     }
