@@ -1,10 +1,20 @@
 package com.aotech.osCommerceSelenium;
 
+import com.aotech.SeleniumDomain.UseCases.InspectProductDetailsUseCase;
+import com.aotech.SeleniumDomain.UseCases.SearchProductUseCase;
+import com.aotech.SeleniumDomain.UseCases.UseCaseFactory;
+import com.aotech.SeleniumDomain.UseCases.UseCaseFactory.UseCase;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
+import java.util.ArrayList;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,42 +25,52 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class MainPageTest {
-    private final MainPage mainPage = new MainPage();
 
-    @BeforeAll
-    public static void setUpAllure() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
+  private final MainPage mainPage = new MainPage();
+  private static WebDriver _driver = null;
 
-    @BeforeEach
-    public void setUp() {
-        Configuration.startMaximized = true;
-        open("https://www.jetbrains.com/");
-    }
+  @BeforeAll
+  public static void setUpAllure() {
 
-    @Test
-    public void search() {
-        mainPage.searchButton.click();
+    SelenideLogger.addListener("allure", new AllureSelenide());
+    WebDriverManager.chromedriver().setup();
+    ArrayList<String> optionsList = new ArrayList<String>();
+    ChromeOptions chromeOptions = new ChromeOptions();
+    optionsList.add("--start-maximized");
+    optionsList.add("--incognito");
+    optionsList.add("disable-notifications");
+    chromeOptions.addArguments(optionsList);
+    chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+    _driver = new ChromeDriver(chromeOptions);
+  }
 
-        $(byId("header-search")).sendKeys("Selenium");
-        $(byXpath("//button[@type='submit' and text()='Search']")).click();
+  @BeforeEach
+  public void setUp() {
+    _driver.get("https://demo.oscommerce.com/");
+  }
 
-        $(byClassName("js-search-input")).shouldHave(attribute("value", "Selenium"));
-    }
+  @AfterEach
+  void tearDown() throws Exception {
+    _driver.quit();
+  }
 
-    @Test
-    public void toolsMenu() {
-        mainPage.toolsMenu.hover();
+  @Test
+  public void search() throws Exception {
+    SearchProductUseCase searchProductUseCase = (SearchProductUseCase) UseCaseFactory
+        .getUseCase(UseCase.SEARCH_PRODUCT_USE_CASE, _driver);
+    searchProductUseCase.initParams("Samsung Galaxy Tab");
+    searchProductUseCase.execute();
 
-        $(byClassName("menu-main__popup-wrapper")).shouldBe(visible);
-    }
+  }
 
-    @Test
-    public void navigationToAllTools() {
-        mainPage.seeAllToolsButton.click();
+  @Test
+  public void inspectProductDetails() throws Exception {
 
-        $(byClassName("products-list")).shouldBe(visible);
+    InspectProductDetailsUseCase inpectProductUseCase = (InspectProductDetailsUseCase) UseCaseFactory
+        .getUseCase(UseCase.INSPECT_PRODUCT_DETAILS_USE_CASE, _driver);
+    inpectProductUseCase.initParams("Samsung Galaxy Tab", "Gadgets");
+    inpectProductUseCase.execute();
+  }
 
-        assertEquals("All Developer Tools and Products by JetBrains", Selenide.title());
-    }
 }
