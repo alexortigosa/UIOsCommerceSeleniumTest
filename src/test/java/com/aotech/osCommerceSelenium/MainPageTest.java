@@ -28,6 +28,7 @@ public class MainPageTest {
 
   private final MainPage mainPage = new MainPage();
   private static WebDriver _driver = null;
+  private static ChromeOptions _chromeOptions;
 
   @BeforeAll
   public static void setUpAllure() {
@@ -35,18 +36,19 @@ public class MainPageTest {
     SelenideLogger.addListener("allure", new AllureSelenide());
     WebDriverManager.chromedriver().setup();
     ArrayList<String> optionsList = new ArrayList<String>();
-    ChromeOptions chromeOptions = new ChromeOptions();
+    _chromeOptions = new ChromeOptions();
     optionsList.add("--start-maximized");
     optionsList.add("--incognito");
     optionsList.add("disable-notifications");
-    chromeOptions.addArguments(optionsList);
-    chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-    chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-    _driver = new ChromeDriver(chromeOptions);
+    _chromeOptions.addArguments(optionsList);
+    _chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    _chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+
   }
 
   @BeforeEach
   public void setUp() {
+    _driver = new ChromeDriver(_chromeOptions);
     _driver.get("https://demo.oscommerce.com/");
   }
 

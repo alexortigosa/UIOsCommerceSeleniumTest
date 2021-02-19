@@ -27,7 +27,5 @@ public class InspectProductDetailsUseCase extends UseCase {
   public void execute() throws Exception {
     this._goToCategoryService.execute();
     this._goToProductService.execute();
-    int asd = 2;
-
   }
 }
