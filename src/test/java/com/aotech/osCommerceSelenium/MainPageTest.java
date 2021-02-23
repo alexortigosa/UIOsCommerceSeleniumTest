@@ -1,56 +1,78 @@
 package com.aotech.osCommerceSelenium;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
+import com.aotech.SeleniumDomain.UseCases.AddSamsunToCartUseCase;
+import com.aotech.SeleniumDomain.UseCases.InspectGalaxyTabDetailsUseCase;
+import com.aotech.SeleniumDomain.UseCases.SearchSamsungUseCase;
+import com.aotech.SeleniumDomain.UseCases.UseCaseFactory;
+import com.aotech.SeleniumDomain.UseCases.UseCaseFactory.UseCase;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import java.util.ArrayList;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 
 public class MainPageTest {
-    private final MainPage mainPage = new MainPage();
 
-    @BeforeAll
-    public static void setUpAllure() {
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
+  private final MainPage mainPage = new MainPage();
+  private static WebDriver _driver = null;
+  private static ChromeOptions _chromeOptions;
 
-    @BeforeEach
-    public void setUp() {
-        Configuration.startMaximized = true;
-        open("https://www.jetbrains.com/");
-    }
+  @BeforeAll
+  public static void setUpAllure() {
 
-    @Test
-    public void search() {
-        mainPage.searchButton.click();
+    SelenideLogger.addListener("allure", new AllureSelenide());
+    WebDriverManager.chromedriver().setup();
+    ArrayList<String> optionsList = new ArrayList<String>();
+    _chromeOptions = new ChromeOptions();
+    optionsList.add("--start-maximized");
+    optionsList.add("--incognito");
+    optionsList.add("disable-notifications");
+    _chromeOptions.addArguments(optionsList);
+    _chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    _chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
 
-        $(byId("header-search")).sendKeys("Selenium");
-        $(byXpath("//button[@type='submit' and text()='Search']")).click();
+  }
 
-        $(byClassName("js-search-input")).shouldHave(attribute("value", "Selenium"));
-    }
+  @BeforeEach
+  public void setUp() {
+    _driver = new ChromeDriver(_chromeOptions);
+    _driver.get("https://demo.oscommerce.com/");
+  }
 
-    @Test
-    public void toolsMenu() {
-        mainPage.toolsMenu.hover();
+  @AfterEach
+  void tearDown() throws Exception {
+    _driver.quit();
+  }
 
-        $(byClassName("menu-main__popup-wrapper")).shouldBe(visible);
-    }
+  @Test
+  public void searchSamsungTestCas() throws Exception {
+    SearchSamsungUseCase searchSamsungUseCase = (SearchSamsungUseCase) UseCaseFactory
+        .getUseCase(UseCase.SEARCH_SAMSUNG_USE_CASE, _driver);
+    searchSamsungUseCase.execute();
 
-    @Test
-    public void navigationToAllTools() {
-        mainPage.seeAllToolsButton.click();
+  }
 
-        $(byClassName("products-list")).shouldBe(visible);
+  @Test
+  public void inspectSamsungDetailsTestCase() throws Exception {
 
-        assertEquals("All Developer Tools and Products by JetBrains", Selenide.title());
-    }
+    InspectGalaxyTabDetailsUseCase inpectProductUseCase = (InspectGalaxyTabDetailsUseCase) UseCaseFactory
+        .getUseCase(UseCase.INSPECT_SAMSUNG_DETAILS_USE_CASE, _driver);
+    inpectProductUseCase.execute();
+  }
+
+  @Test
+  public void addSamsungToCartTestCase() throws Exception {
+
+    AddSamsunToCartUseCase addTestCase = (AddSamsunToCartUseCase) UseCaseFactory
+        .getUseCase(UseCase.ADD_SAMSUNG_TO_CART_USE_CASE, _driver);
+    addTestCase.execute();
+  }
+
 }
