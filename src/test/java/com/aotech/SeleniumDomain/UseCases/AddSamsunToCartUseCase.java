@@ -1,5 +1,6 @@
 package com.aotech.SeleniumDomain.UseCases;
 
+import com.aotech.SeleniumDomain.Common.IService;
 import com.aotech.SeleniumDomain.Common.UseCase;
 import com.aotech.SeleniumDomain.Services.AddProductToCartService;
 
@@ -10,8 +11,8 @@ public class AddSamsunToCartUseCase extends UseCase {
   private AddProductToCartService _addProductToCartService;
 
   public AddSamsunToCartUseCase(
-      AddProductToCartService _addProductToCartService) {
-    this._addProductToCartService = _addProductToCartService;
+      IService addProductToCartService) {
+    this._addProductToCartService = (AddProductToCartService) addProductToCartService;
     _addProductToCartService.initParams(_targetProductName, _targetCategoryName);
   }
 

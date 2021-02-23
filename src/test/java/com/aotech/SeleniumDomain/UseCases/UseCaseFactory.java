@@ -12,7 +12,8 @@ public class UseCaseFactory {
 
   public static enum UseCase {
     SEARCH_SAMSUNG_USE_CASE,
-    INSPECT_SAMSUNG_DETAILS_USE_CASE
+    INSPECT_SAMSUNG_DETAILS_USE_CASE,
+    ADD_SAMSUNG_TO_CART_USE_CASE
   }
 
   public static IUseCase getUseCase(UseCase useCase, WebDriver driver) throws Exception {
@@ -24,6 +25,9 @@ public class UseCaseFactory {
       case INSPECT_SAMSUNG_DETAILS_USE_CASE:
         return new InspectGalaxyTabDetailsUseCase(
             ServiceFactory.getService(Service.INSPECT_PRODUCT_DETAIL_SERVICE, driver));
+      case ADD_SAMSUNG_TO_CART_USE_CASE:
+        return new AddSamsunToCartUseCase(
+            ServiceFactory.getService(Service.ADD_PRODUCT_TO_CART, driver));
       default:
         throw new Exception("The use case not exist");
     }

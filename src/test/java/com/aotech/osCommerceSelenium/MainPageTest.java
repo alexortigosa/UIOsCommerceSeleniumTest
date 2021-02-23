@@ -1,5 +1,6 @@
 package com.aotech.osCommerceSelenium;
 
+import com.aotech.SeleniumDomain.UseCases.AddSamsunToCartUseCase;
 import com.aotech.SeleniumDomain.UseCases.InspectGalaxyTabDetailsUseCase;
 import com.aotech.SeleniumDomain.UseCases.SearchSamsungUseCase;
 import com.aotech.SeleniumDomain.UseCases.UseCaseFactory;
@@ -64,6 +65,14 @@ public class MainPageTest {
     InspectGalaxyTabDetailsUseCase inpectProductUseCase = (InspectGalaxyTabDetailsUseCase) UseCaseFactory
         .getUseCase(UseCase.INSPECT_SAMSUNG_DETAILS_USE_CASE, _driver);
     inpectProductUseCase.execute();
+  }
+
+  @Test
+  public void addSamsungToCartTestCase() throws Exception {
+
+    AddSamsunToCartUseCase addTestCase = (AddSamsunToCartUseCase) UseCaseFactory
+        .getUseCase(UseCase.ADD_SAMSUNG_TO_CART_USE_CASE, _driver);
+    addTestCase.execute();
   }
 
 }
