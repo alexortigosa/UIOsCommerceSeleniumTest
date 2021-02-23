@@ -13,7 +13,8 @@ public class ServiceFactory {
     GO_TO_SERVICE,
     SELECT_PRODUCT_SERVICE,
     INSPECT_PRODUCT_DETAIL_SERVICE,
-    SEARCH_PRODUCT_SERVICE
+    SEARCH_PRODUCT_SERVICE,
+    ADD_PRODUCT_TO_CART
   }
 
   public static IService getService(Service service, WebDriver driver) throws Exception {
@@ -28,6 +29,9 @@ public class ServiceFactory {
       case SEARCH_PRODUCT_SERVICE:
         return new SearchProductService(seleniumRepository,
             getService(Service.GO_TO_SERVICE, driver));
+      case ADD_PRODUCT_TO_CART:
+        return new AddProductToCartService(seleniumRepository,
+            getService(Service.INSPECT_PRODUCT_DETAIL_SERVICE, driver));
       default:
         throw new Exception("The service not exist");
     }

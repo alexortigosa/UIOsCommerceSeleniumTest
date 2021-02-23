@@ -41,7 +41,7 @@ public class SeleniumToolingRepository implements IToolingRepository<By> {
   public void clickElement(String xpathTarget) {
     WebElement nextButton = this._driver
         .findElement(By.xpath(xpathTarget));
-    this._wait.until(ExpectedConditions.elementToBeClickable(nextButton));
+    //this._wait.until(ExpectedConditions.elementToBeClickable(nextButton));
     nextButton.click();
   }
 
