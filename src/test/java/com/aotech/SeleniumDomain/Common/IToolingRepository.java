@@ -4,9 +4,11 @@ public interface IToolingRepository<T> {
 
   String getTitle(T filter);
 
-  void clickButton(String target, String type);
+  void clickElement(String target, String type);
 
-  void setInput(T filter);
+  void clickElement(String xpathTarget);
+
+  void setInput(String inputXpathTarget, String text);
 
   void executeScript(T filter, String script);
 

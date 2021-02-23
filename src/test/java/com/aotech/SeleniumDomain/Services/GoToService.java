@@ -23,6 +23,6 @@ public class GoToService extends Service {
 
   @Override
   public void execute() {
-    this._repository.clickButton(_target, "a");
+    this._repository.clickElement(_target, "a");
   }
 }

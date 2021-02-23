@@ -9,6 +9,8 @@ public class SearchProductService extends Service {
 
   private GoToService _goToService;
   private String _targetProductName;
+  private String _xpathInput = "//*[@id=\"columnLeft\"]/div[3]/div[2]/form/input[1]";
+  private String _xpathSearchButton = "//*[@id=\"columnLeft\"]/div[3]/div[2]/form/input[3]";
 
   public SearchProductService(
       IToolingRepository<By> repository, IService goToService) {
@@ -23,7 +25,8 @@ public class SearchProductService extends Service {
 
   @Override
   public void execute() {
-    //To do, insert product name
+    _repository.setInput(_xpathInput, _targetProductName);
+    _repository.clickElement(_xpathSearchButton);
     this._goToService.execute();
   }
 }

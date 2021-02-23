@@ -1,6 +1,5 @@
 package com.aotech.SeleniumDomain.Services;
 
-import com.aotech.SeleniumDomain.Common.IService;
 import com.aotech.SeleniumDomain.Common.IToolingRepository;
 import com.aotech.SeleniumDomain.Common.Service;
 import org.openqa.selenium.By;
@@ -22,7 +21,7 @@ public class InspectProductDetailsService extends Service {
 
   @Override
   public void execute() {
-    this._repository.clickButton(_targetCategoryName, "a");
-    this._repository.clickButton(_targetProductName, "a");
+    this._repository.clickElement(_targetCategoryName, "a");
+    this._repository.clickElement(_targetProductName, "a");
   }
 }

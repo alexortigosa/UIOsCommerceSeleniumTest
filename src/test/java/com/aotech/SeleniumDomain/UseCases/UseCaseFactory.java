@@ -11,15 +11,15 @@ import org.openqa.selenium.WebDriver;
 public class UseCaseFactory {
 
   public static enum UseCase {
-    SEARCH_PRODUCT_USE_CASE,
+    SEARCH_SAMSUNG_USE_CASE,
     INSPECT_SAMSUNG_DETAILS_USE_CASE
   }
 
   public static IUseCase getUseCase(UseCase useCase, WebDriver driver) throws Exception {
     IToolingRepository<By> seleniumRepository = new SeleniumToolingRepository(driver);
     switch (useCase) {
-      case SEARCH_PRODUCT_USE_CASE:
-        return new SearchProductUseCase(ServiceFactory.getService(Service.GO_TO_SERVICE, driver));
+      case SEARCH_SAMSUNG_USE_CASE:
+        return new SearchSamsungUseCase(ServiceFactory.getService(Service.GO_TO_SERVICE, driver));
       case INSPECT_SAMSUNG_DETAILS_USE_CASE:
         return new InspectGalaxyTabDetailsUseCase(
             ServiceFactory.getService(Service.INSPECT_PRODUCT_DETAIL_SERVICE, driver));
