@@ -12,7 +12,7 @@ public class UseCaseFactory {
 
   public static enum UseCase {
     SEARCH_PRODUCT_USE_CASE,
-    INSPECT_PRODUCT_DETAILS_USE_CASE
+    INSPECT_SAMSUNG_DETAILS_USE_CASE
   }
 
   public static IUseCase getUseCase(UseCase useCase, WebDriver driver) throws Exception {
@@ -20,10 +20,9 @@ public class UseCaseFactory {
     switch (useCase) {
       case SEARCH_PRODUCT_USE_CASE:
         return new SearchProductUseCase(ServiceFactory.getService(Service.GO_TO_SERVICE, driver));
-      case INSPECT_PRODUCT_DETAILS_USE_CASE:
-        return new InspectProductDetailsUseCase(
-            ServiceFactory.getService(Service.GO_TO_SERVICE, driver),
-            ServiceFactory.getService(Service.GO_TO_SERVICE, driver));
+      case INSPECT_SAMSUNG_DETAILS_USE_CASE:
+        return new InspectGalaxyTabDetailsUseCase(
+            ServiceFactory.getService(Service.INSPECT_PRODUCT_DETAIL_SERVICE, driver));
       default:
         throw new Exception("The use case not exist");
     }

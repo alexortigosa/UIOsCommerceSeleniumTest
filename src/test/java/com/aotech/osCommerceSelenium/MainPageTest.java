@@ -1,11 +1,9 @@
 package com.aotech.osCommerceSelenium;
 
-import com.aotech.SeleniumDomain.UseCases.InspectProductDetailsUseCase;
+import com.aotech.SeleniumDomain.UseCases.InspectGalaxyTabDetailsUseCase;
 import com.aotech.SeleniumDomain.UseCases.SearchProductUseCase;
 import com.aotech.SeleniumDomain.UseCases.UseCaseFactory;
 import com.aotech.SeleniumDomain.UseCases.UseCaseFactory.UseCase;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -16,11 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -67,11 +61,10 @@ public class MainPageTest {
   }
 
   @Test
-  public void inspectProductDetails() throws Exception {
+  public void inspectSamsungDetailsTestCase() throws Exception {
 
-    InspectProductDetailsUseCase inpectProductUseCase = (InspectProductDetailsUseCase) UseCaseFactory
-        .getUseCase(UseCase.INSPECT_PRODUCT_DETAILS_USE_CASE, _driver);
-    inpectProductUseCase.initParams("Samsung Galaxy Tab", "Gadgets");
+    InspectGalaxyTabDetailsUseCase inpectProductUseCase = (InspectGalaxyTabDetailsUseCase) UseCaseFactory
+        .getUseCase(UseCase.INSPECT_SAMSUNG_DETAILS_USE_CASE, _driver);
     inpectProductUseCase.execute();
   }
 
