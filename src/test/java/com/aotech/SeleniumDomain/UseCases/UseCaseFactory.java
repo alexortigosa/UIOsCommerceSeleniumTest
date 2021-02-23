@@ -19,7 +19,7 @@ public class UseCaseFactory {
     IToolingRepository<By> seleniumRepository = new SeleniumToolingRepository(driver);
     switch (useCase) {
       case SEARCH_SAMSUNG_USE_CASE:
-        return new SearchSamsungUseCase(ServiceFactory.getService(Service.GO_TO_SERVICE, driver));
+        return new SearchSamsungUseCase(ServiceFactory.getService(Service., driver));
       case INSPECT_SAMSUNG_DETAILS_USE_CASE:
         return new InspectGalaxyTabDetailsUseCase(
             ServiceFactory.getService(Service.INSPECT_PRODUCT_DETAIL_SERVICE, driver));
