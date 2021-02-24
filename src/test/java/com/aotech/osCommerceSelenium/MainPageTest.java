@@ -70,7 +70,7 @@ class MainPageTest {
   }
 
   @Test
-  public void addSamsungToCartTestCase() throws Exception {
+  void addSamsungToCartTestCase() throws Exception {
 
     AddSamsunToCartUseCase addTestCase = (AddSamsunToCartUseCase) UseCaseFactory
         .getUseCase(UseCase.ADD_SAMSUNG_TO_CART_USE_CASE, _driver);
