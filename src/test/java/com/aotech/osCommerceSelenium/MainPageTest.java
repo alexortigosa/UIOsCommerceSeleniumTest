@@ -62,7 +62,7 @@ class MainPageTest {
   }
 
   @Test
-  public void inspectSamsungDetailsTestCase() throws Exception {
+  void inspectSamsungDetailsTestCase() throws Exception {
 
     InspectGalaxyTabDetailsUseCase inpectProductUseCase = (InspectGalaxyTabDetailsUseCase) UseCaseFactory
         .getUseCase(UseCase.INSPECT_SAMSUNG_DETAILS_USE_CASE, _driver);
