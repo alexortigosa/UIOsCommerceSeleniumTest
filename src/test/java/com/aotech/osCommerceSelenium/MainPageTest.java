@@ -19,8 +19,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 public class MainPageTest {
-
-  private final MainPage mainPage = new MainPage();
+  
   private static WebDriver _driver = null;
   private static ChromeOptions _chromeOptions;
 
