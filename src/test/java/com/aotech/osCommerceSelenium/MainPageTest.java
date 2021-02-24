@@ -54,7 +54,7 @@ class MainPageTest {
   }
 
   @Test
-  public void searchSamsungTestCas() throws Exception {
+  void searchSamsungTestCas() throws Exception {
     SearchSamsungUseCase searchSamsungUseCase = (SearchSamsungUseCase) UseCaseFactory
         .getUseCase(UseCase.SEARCH_SAMSUNG_USE_CASE, _driver);
     searchSamsungUseCase.execute();
