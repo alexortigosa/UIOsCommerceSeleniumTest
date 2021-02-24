@@ -1,4 +1,4 @@
-package com.aotech.osCommerceSelenium;
+package com.aotech.oscommerceselenium;
 
 import com.aotech.SeleniumDomain.UseCases.AddSamsunToCartUseCase;
 import com.aotech.SeleniumDomain.UseCases.InspectGalaxyTabDetailsUseCase;
@@ -18,8 +18,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class MainPageTest {
-  
+class MainPageTest {
+
   private static WebDriver _driver = null;
   private static ChromeOptions _chromeOptions;
 
@@ -54,7 +54,7 @@ public class MainPageTest {
   }
 
   @Test
-  public void searchSamsungTestCas() throws Exception {
+  void searchSamsungTestCas() throws Exception {
     SearchSamsungUseCase searchSamsungUseCase = (SearchSamsungUseCase) UseCaseFactory
         .getUseCase(UseCase.SEARCH_SAMSUNG_USE_CASE, _driver);
     searchSamsungUseCase.execute();
@@ -62,7 +62,7 @@ public class MainPageTest {
   }
 
   @Test
-  public void inspectSamsungDetailsTestCase() throws Exception {
+  void inspectSamsungDetailsTestCase() throws Exception {
 
     InspectGalaxyTabDetailsUseCase inpectProductUseCase = (InspectGalaxyTabDetailsUseCase) UseCaseFactory
         .getUseCase(UseCase.INSPECT_SAMSUNG_DETAILS_USE_CASE, _driver);
@@ -70,7 +70,7 @@ public class MainPageTest {
   }
 
   @Test
-  public void addSamsungToCartTestCase() throws Exception {
+  void addSamsungToCartTestCase() throws Exception {
 
     AddSamsunToCartUseCase addTestCase = (AddSamsunToCartUseCase) UseCaseFactory
         .getUseCase(UseCase.ADD_SAMSUNG_TO_CART_USE_CASE, _driver);
