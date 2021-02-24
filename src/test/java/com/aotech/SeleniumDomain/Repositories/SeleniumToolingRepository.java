@@ -1,7 +1,6 @@
 package com.aotech.SeleniumDomain.Repositories;
 
 import com.aotech.SeleniumDomain.Common.IToolingRepository;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
@@ -23,11 +22,6 @@ public class SeleniumToolingRepository implements IToolingRepository<By> {
     this._wait = new WebDriverWait(driver, ESPERA);
   }
 
-  @Override
-  public String getTitle(By filter) {
-    WebElement h1Element = this._driver.findElement(filter);
-    return h1Element.getText();
-  }
 
   @Override
   public void clickElement(String target, String type) {
@@ -49,22 +43,5 @@ public class SeleniumToolingRepository implements IToolingRepository<By> {
   public void setInput(String inputXpathTarget, String text) {
     WebElement inputText = this._driver.findElement(By.xpath(inputXpathTarget));
     inputText.sendKeys(text);
-  }
-
-  @Override
-  public void executeScript(By filter, String script) {
-    WebElement inputText = this._driver.findElement(filter);
-    inputText.sendKeys(script);
-  }
-
-  @Override
-  public void acceptDialog() {
-    Alert javascriptAlert = this._driver.switchTo().alert();
-    javascriptAlert.accept();
-  }
-
-  @Override
-  public void sleep() throws InterruptedException {
-    Thread.sleep(2000);
   }
 }
