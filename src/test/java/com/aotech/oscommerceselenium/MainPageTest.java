@@ -1,4 +1,4 @@
-package com.aotech.osCommerceSelenium;
+package com.aotech.oscommerceselenium;
 
 import com.aotech.SeleniumDomain.UseCases.AddSamsunToCartUseCase;
 import com.aotech.SeleniumDomain.UseCases.InspectGalaxyTabDetailsUseCase;
