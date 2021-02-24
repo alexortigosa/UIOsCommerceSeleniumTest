@@ -18,8 +18,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class MainPageTest {
-  
+class MainPageTest {
+
   private static WebDriver _driver = null;
   private static ChromeOptions _chromeOptions;
 
