@@ -34,6 +34,9 @@ public class MainPageTest {
     optionsList.add("--start-maximized");
     optionsList.add("--incognito");
     optionsList.add("disable-notifications");
+    optionsList.add("--no-sandbox");
+    optionsList.add("--disable-dev-shm-usage");
+    optionsList.add("--headless");
     _chromeOptions.addArguments(optionsList);
     _chromeOptions.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
     _chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
